@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class target_stat : MonoBehaviour {
 
-    float aggro;
+    float aggro = 0;
     enum AggroState {Low, Medium, High};
-
+    AggroState CurrentState;
     /// <summary>
     /// 부위별로 필요한 부분들
     /// 각 부위별 촉각 수치 -> 전체 어그로로 환산
@@ -15,6 +15,8 @@ public class target_stat : MonoBehaviour {
 
     Transform mosq;
     float mosqdst; //머리tag의 부위와 모기 사이의 거리
+    [SerializeField] float dstRange; //거리 제한
+    [SerializeField] float dstAggroSpeed;
 
     Transform head;
 
@@ -32,6 +34,29 @@ public class target_stat : MonoBehaviour {
         if(mosq != null && head != null)
         {
             mosqdst = Vector3.Distance(head.transform.position, mosq.transform.position);
+
+            //add aggro if the distance is too close
+            if (mosqdst < dstRange)
+            {
+                aggro += dstAggroSpeed * Time.deltaTime;
+            }
+            else
+            {
+                aggro -= dstAggroSpeed / 2 * Time.deltaTime;
+            }
+
+        }
+
+        //aggro affecting the aggrostate
+        if(aggro <= 33)
+        {
+            CurrentState = AggroState.Low;
+        } else if (aggro > 66)
+        {
+            CurrentState = AggroState.High;
+        } else
+        {
+            CurrentState = AggroState.Medium;
         }
 
 
