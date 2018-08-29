@@ -14,10 +14,13 @@ public class mosquito_movement : MonoBehaviour {
     private Rigidbody rb;
     private bool canMove = true;
 
+    private mosquito_state state;
+
     // Use this for initialization
     void Start() {
         mouselook.Init(transform, fp_cam.transform);
         rb = GetComponent<Rigidbody>();
+        state = GetComponent<mosquito_state>();
     }
 
     // Update is called once per frame
@@ -52,7 +55,7 @@ public class mosquito_movement : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        Switch_To_ThirdPerson();
+        Switch_To_ThirdPerson(collision);
     }
 
 
@@ -64,12 +67,23 @@ public class mosquito_movement : MonoBehaviour {
         rb.constraints = RigidbodyConstraints.FreezeRotationZ;
 
         canMove = true;
+
+        state.current_state = (mosquito_state.m_state)3;
     }
-    private void Switch_To_ThirdPerson()
+    private void Switch_To_ThirdPerson(Collision collision)
     {
         tp_cam.depth = 1;
         rb.constraints = RigidbodyConstraints.FreezeAll;
 
         canMove = false;
+
+        if (collision.transform.tag == "Human")
+        {
+            state.current_state = (mosquito_state.m_state)1;
+        }
+        else
+        {
+            state.current_state = (mosquito_state.m_state)0;
+        }
     }
 }
