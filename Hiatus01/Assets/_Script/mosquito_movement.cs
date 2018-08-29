@@ -16,6 +16,8 @@ public class mosquito_movement : MonoBehaviour {
 
     private mosquito_state state;
 
+    private Vector3 surface_vector = Vector3.up;
+
     // Use this for initialization
     void Start() {
         mouselook.Init(transform, fp_cam.transform);
@@ -32,20 +34,21 @@ public class mosquito_movement : MonoBehaviour {
         {
             transform.Translate(Vector3.forward * speed * forward_movement * Time.deltaTime);
             transform.Translate(Vector3.right * speed * right_movement * Time.deltaTime);
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                rb.AddForce(Vector3.up * jump_force);
+            }
         }
         else {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                Vector3 normal_to_surface = transform.position - surface_vector;
+                rb.AddForce(normal_to_surface * 2000);
                 Switch_To_FirstPerson();
             }
         }
-         
-        if (Input.GetKey(KeyCode.Space)) {
-            rb.AddForce(Vector3.up * jump_force);
-        }
-
         LookAt_Mouse_Position();
-
     }
 
     [SerializeField] private MouseLook mouselook = new MouseLook();
@@ -56,6 +59,8 @@ public class mosquito_movement : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Switch_To_ThirdPerson(collision);
+
+        surface_vector = collision.contacts[0].point;
     }
 
 
@@ -86,4 +91,6 @@ public class mosquito_movement : MonoBehaviour {
             state.current_state = (mosquito_state.m_state)0;
         }
     }
+
+    
 }
