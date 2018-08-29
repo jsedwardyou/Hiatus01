@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class target_stat : MonoBehaviour {
 
-    float aggro = 0;
+    public float aggro = 0;
     enum AggroState {Low, Medium, High};
-    AggroState CurrentState;
+    [SerializeField] AggroState CurrentState;
     /// <summary>
     /// 부위별로 필요한 부분들
     /// 각 부위별 촉각 수치 -> 전체 어그로로 환산
@@ -15,15 +15,15 @@ public class target_stat : MonoBehaviour {
 
     Transform mosq;
     float mosqdst; //머리tag의 부위와 모기 사이의 거리
-    [SerializeField] float dstRange; //거리 제한
-    [SerializeField] float dstAggroSpeed;
+    [SerializeField] float dstRange=2; //거리 제한
+    [SerializeField] float dstAggroSpeed=5;
 
     Transform head;
 
 
     // Use this for initialization
     void Start () {
-        mosq = GameObject.FindGameObjectWithTag("player").transform; //find the player mosquito //through tag
+        mosq = GameObject.FindGameObjectWithTag("Player").transform; //find the player mosquito //through tag
         head = transform.Find("head"); //find the head child //through name
 	}
 	
@@ -45,7 +45,11 @@ public class target_stat : MonoBehaviour {
                 aggro -= dstAggroSpeed / 2 * Time.deltaTime;
             }
 
+            aggro = Mathf.Clamp(aggro, 0, 100);
+
         }
+
+        
 
         //aggro affecting the aggrostate
         if(aggro <= 33)

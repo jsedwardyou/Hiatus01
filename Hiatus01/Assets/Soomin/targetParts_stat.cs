@@ -5,13 +5,13 @@ using UnityEngine;
 public class targetParts_stat : MonoBehaviour {
 
 
-    [SerializeField] float maxSensitivity;
+    [SerializeField] float maxSensitivity = 100;
     float currentSensitivity;
 
-    [SerializeField] float maxTotalBlood;
-    [SerializeField] float maxBloodperDrain;
+    [SerializeField] float maxTotalBlood = 100;
+    [SerializeField] float maxBloodperDrain = 100;
     float currentBloodDrain;
-    float cumulatedBloodDrain;
+    [SerializeField] float cumulatedBloodDrain;
     int iterationNo = 1;
 
 
@@ -19,13 +19,13 @@ public class targetParts_stat : MonoBehaviour {
 
 
 
-    bool isDrainable = true;
+    public bool isDrainable = true;
     
     Transform mosq;
 
     // Use this for initialization
     void Start () {
-        mosq = GameObject.FindGameObjectWithTag("player").transform; //find the player mosquito //through tag
+        mosq = GameObject.FindGameObjectWithTag("Player").transform; //find the player mosquito //through tag
         targetStat = GetComponentInParent<target_stat>();
 
     }
@@ -49,18 +49,38 @@ public class targetParts_stat : MonoBehaviour {
                 // action of the target works here
                 // coroutine prefered
                 // will be declared in each body parts
-
-                isDrainable = true;
+                Debug.Log("reached temp max");
+                targetStat.aggro += 30;
 
                 iterationNo++;
 
+                isDrainable = true;
+                
             }
         }
 
 
         //blood drained is calculated through interaction between the mosquito
+        //done in suck
 
         //mostquito will increase the sensitivity of the body parts
 
+    }
+
+    public float CumulatedBloodDrain
+    {
+        get
+        {
+            return cumulatedBloodDrain;
+        }
+        set
+        {
+            cumulatedBloodDrain = value;
+        }
+    }
+
+    protected virtual void React()
+    {
+         
     }
 }
