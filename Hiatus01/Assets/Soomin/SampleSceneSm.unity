@@ -548,6 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSensitivity: 100
+  sensitivitySpeed: 3
   maxTotalBlood: 100
   maxBloodperDrain: 33
   cumulatedBloodDrain: 0
@@ -768,6 +769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSensitivity: 100
+  sensitivitySpeed: 3
   maxTotalBlood: 100
   maxBloodperDrain: 100
   cumulatedBloodDrain: 0
@@ -888,7 +890,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggro: 0
-  CurrentState: 0
   dstRange: 2
   dstAggroSpeed: 5
 --- !u!1 &855330077
@@ -1334,6 +1335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSensitivity: 100
+  sensitivitySpeed: 3
   maxTotalBlood: 100
   maxBloodperDrain: 33
   cumulatedBloodDrain: 0
@@ -1505,6 +1507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSensitivity: 100
+  sensitivitySpeed: 3
   maxTotalBlood: 100
   maxBloodperDrain: 33
   cumulatedBloodDrain: 0

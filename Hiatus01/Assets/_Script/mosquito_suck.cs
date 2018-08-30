@@ -13,6 +13,7 @@ public class mosquito_suck : MonoBehaviour {
     [SerializeField] private Image blood_bar;
 
     private mosquito_state state;
+    private targetParts_stat targetPartsStat;
     
     private Collision currentCollider;
 
@@ -29,11 +30,14 @@ public class mosquito_suck : MonoBehaviour {
         {
             if (current_drain >= max_drain) return;
 
-            if (currentCollider.gameObject.GetComponent<targetParts_stat>().isDrainable == true)
+            targetPartsStat = currentCollider.gameObject.GetComponent<targetParts_stat>();
+
+            if (targetPartsStat.isDrainable == true)
             {
                 current_drain += speed_drain * Time.deltaTime;
 
-                currentCollider.gameObject.GetComponent<targetParts_stat>().CumulatedBloodDrain += speed_drain * Time.deltaTime;
+                targetPartsStat.CumulatedBloodDrain += speed_drain * Time.deltaTime;
+                targetPartsStat.IncreaseSensitivity(targetPartsStat.sensitivitySpeed * Time.deltaTime);
             }
         }
     }

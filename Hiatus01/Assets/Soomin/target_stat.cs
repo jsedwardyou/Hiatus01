@@ -5,8 +5,13 @@ using UnityEngine;
 public class target_stat : MonoBehaviour {
 
     public float aggro = 0;
-    enum AggroState {Low, Medium, High};
-    [SerializeField] AggroState CurrentState;
+
+    int currentAggroState = 0;
+    int tempAggroState = 0;
+    //enum AggroState {Low, Medium, High, Full};
+    //[SerializeField] AggroState CurrentState;
+    //AggroState tempState;
+    bool aggroDecreasePause = false;
     /// <summary>
     /// 부위별로 필요한 부분들
     /// 각 부위별 촉각 수치 -> 전체 어그로로 환산
@@ -31,7 +36,7 @@ public class target_stat : MonoBehaviour {
 	void Update () {
 		
         //calculate distance between mosquito
-        if(mosq != null && head != null)
+        if((mosq != null && head != null) )
         {
             mosqdst = Vector3.Distance(head.transform.position, mosq.transform.position);
 
@@ -40,7 +45,7 @@ public class target_stat : MonoBehaviour {
             {
                 aggro += dstAggroSpeed * Time.deltaTime;
             }
-            else
+            else if(!aggroDecreasePause)
             {
                 aggro -= dstAggroSpeed / 2 * Time.deltaTime;
             }
@@ -49,20 +54,61 @@ public class target_stat : MonoBehaviour {
 
         }
 
-        
+
 
         //aggro affecting the aggrostate
-        if(aggro <= 33)
+        if (aggro <= 33)
         {
-            CurrentState = AggroState.Low;
+            currentAggroState = 0;
+        } else if (aggro > 99)
+        {
+            currentAggroState = 3;
         } else if (aggro > 66)
         {
-            CurrentState = AggroState.High;
+            currentAggroState = 2;
         } else
         {
-            CurrentState = AggroState.Medium;
+            currentAggroState = 1;
         }
+        StateChange();
 
 
 	}
+
+    public void AggroToNextLevel()
+    {
+        switch (currentAggroState)
+        {
+            case 0:
+                aggro = 34;
+                break;
+            case 1:
+                aggro = 67;
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    void StateChange()
+    {
+        if(currentAggroState > tempAggroState) //incline in aggro state made
+        {
+            StartCoroutine(SetAggroDecreasePause(5));
+        }
+        
+        tempAggroState = currentAggroState;
+
+    }
+
+    IEnumerator SetAggroDecreasePause(float sec)
+    {
+        aggroDecreasePause = true;
+        Debug.Log("pause on");
+        yield return new WaitForSeconds(sec);
+        aggroDecreasePause = false;
+        Debug.Log("pause off");
+    }
+
 }

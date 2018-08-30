@@ -6,6 +6,7 @@ public class targetParts_stat : MonoBehaviour {
 
 
     [SerializeField] float maxSensitivity = 100;
+    public float sensitivitySpeed = 3;
     float currentSensitivity;
 
     [SerializeField] float maxTotalBlood = 100;
@@ -46,11 +47,12 @@ public class targetParts_stat : MonoBehaviour {
             {
                 isDrainable = false;
 
-                // action of the target works here
-                // coroutine prefered
-                // will be declared in each body parts
+                // 
+                // send signal to targetstat for action
+                // 
+
                 Debug.Log("reached temp max");
-                targetStat.aggro += 30;
+                targetStat.AggroToNextLevel() ;
 
                 iterationNo++;
 
@@ -79,8 +81,22 @@ public class targetParts_stat : MonoBehaviour {
         }
     }
 
-    protected virtual void React()
+    public float CurrentSensitivity
     {
-         
+        get
+        {
+            return currentSensitivity;
+        }
+        set
+        {
+            currentSensitivity = value;
+        }
     }
+
+    public void IncreaseSensitivity(float f)
+    {
+        targetStat.aggro += f;
+        Debug.Log(targetStat.aggro);
+    }
+
 }
