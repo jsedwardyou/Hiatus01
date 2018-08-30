@@ -1,0 +1,71 @@
+From c9f16f68143e7bc394ffbd297a354a96bb60a991 Mon Sep 17 00:00:00 2001
+From: soomin <jsedwardyou@gmail.com>
+Date: Thu, 30 Aug 2018 04:24:32 +0900
+Subject: [PATCH] working
+
+---
+ Hiatus01/Assets/Soomin/mosquito_suck_sm.cs    | 33 +++++++++++++++++++
+ .../Assets/Soomin/mosquito_suck_sm.cs.meta    | 11 +++++++
+ 2 files changed, 44 insertions(+)
+ create mode 100644 Hiatus01/Assets/Soomin/mosquito_suck_sm.cs
+ create mode 100644 Hiatus01/Assets/Soomin/mosquito_suck_sm.cs.meta
+
+diff --git a/Hiatus01/Assets/Soomin/mosquito_suck_sm.cs b/Hiatus01/Assets/Soomin/mosquito_suck_sm.cs
+new file mode 100644
+index 0000000..6f442ab
+--- /dev/null
++++ b/Hiatus01/Assets/Soomin/mosquito_suck_sm.cs
+@@ -0,0 +1,33 @@
++﻿using System.Collections;
++using System.Collections.Generic;
++using UnityEngine;
++using UnityEngine.UI;
++
++public class mosquito_suck_sm : MonoBehaviour {
++
++    [SerializeField] private float speed_drain;
++    [SerializeField] private float max_drain;
++
++    private float current_drain;
++
++    [SerializeField] private Image blood_bar;
++
++    private mosquito_state state;
++
++	// Use this for initialization
++	void Start () {
++        blood_bar.fillAmount = 0;
++        state = GetComponent<mosquito_state>();
++	}
++	
++	// Update is called once per frame
++	void Update () {
++        if (state.current_state == (mosquito_state.m_state)1) {
++            if (current_drain >= max_drain) return;
++
++            current_drain += speed_drain * Time.deltaTime;
++        }
++
++        blood_bar.fillAmount = (current_drain / max_drain);
++	}
++}
+diff --git a/Hiatus01/Assets/Soomin/mosquito_suck_sm.cs.meta b/Hiatus01/Assets/Soomin/mosquito_suck_sm.cs.meta
+new file mode 100644
+index 0000000..09a0da6
+--- /dev/null
++++ b/Hiatus01/Assets/Soomin/mosquito_suck_sm.cs.meta
+@@ -0,0 +1,11 @@
++fileFormatVersion: 2
++guid: 13ab6be4fc398274982e84d479c3a5f7
++MonoImporter:
++  externalObjects: {}
++  serializedVersion: 2
++  defaultReferences: []
++  executionOrder: 0
++  icon: {instanceID: 0}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
+-- 
+2.17.1.windows.2
+

@@ -7,8 +7,10 @@ public class Human_Controller : MonoBehaviour {
     [SerializeField] private GameObject head;
     private GameObject mosquito;
 
-    [SerializeField] private float max_head_rotangle;
     [SerializeField] private float rotate_speed;
+
+    [SerializeField] private GameObject Left_Arm_Pivot;
+    [SerializeField] private GameObject Right_Arm_Pivot;
 
     private bool canTrack = true;
 
@@ -35,8 +37,10 @@ public class Human_Controller : MonoBehaviour {
                 StartCoroutine(Track_Mosquito(angle));
             }
         }
-        
-	}
+
+        Left_Arm_Pivot.transform.LookAt(mosquito.transform.position);
+        Right_Arm_Pivot.transform.LookAt(mosquito.transform.position);
+    }
 
     private IEnumerator Track_Mosquito(float init_angle) {
         canTrack = false;
@@ -53,7 +57,7 @@ public class Human_Controller : MonoBehaviour {
             angle = angle_towards_mosquito();
             yield return null;
         }
-        anim.Play("Human_StandUp");
+        anim.Play("Human_Catch");
         canTrack = true;
         yield return null;
     }
