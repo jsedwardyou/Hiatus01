@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 71328568}
   - component: {fileID: 71328567}
   - component: {fileID: 71328566}
+  - component: {fileID: 71328569}
   m_Layer: 0
   m_Name: Head
   m_TagString: Human
@@ -287,6 +288,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 71328564}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &71328569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 71328564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093cf9ad75811b246a7be6ab80270aa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSensitivity: 100
+  sensitivitySpeed: 3
+  maxTotalBlood: 100
+  maxBloodperDrain: 100
+  cumulatedBloodDrain: 0
+  targetStat: {fileID: 85066528}
+  isDrainable: 1
 --- !u!1 &85066523
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +317,7 @@ GameObject:
   - component: {fileID: 85066525}
   - component: {fileID: 85066526}
   - component: {fileID: 85066527}
+  - component: {fileID: 85066528}
   m_Layer: 0
   m_Name: Human
   m_TagString: Human
@@ -367,6 +387,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &85066528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 85066523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810b835483d18c440b7130c868df3a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aggro: 0
+  dstRange: 2
+  dstAggroSpeed: 5
 --- !u!1 &130753535
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,7 +501,7 @@ GameObject:
   - component: {fileID: 196644803}
   m_Layer: 0
   m_Name: Mosquito
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -578,6 +612,7 @@ GameObject:
   - component: {fileID: 244744172}
   - component: {fileID: 244744171}
   - component: {fileID: 244744170}
+  - component: {fileID: 244744173}
   m_Layer: 0
   m_Name: Right Leg
   m_TagString: Human
@@ -652,6 +687,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 244744168}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &244744173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 244744168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093cf9ad75811b246a7be6ab80270aa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSensitivity: 100
+  sensitivitySpeed: 3
+  maxTotalBlood: 100
+  maxBloodperDrain: 100
+  cumulatedBloodDrain: 0
+  targetStat: {fileID: 85066528}
+  isDrainable: 1
 --- !u!1 &412790070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1346,7 @@ GameObject:
   - component: {fileID: 862557472}
   - component: {fileID: 862557471}
   - component: {fileID: 862557470}
+  - component: {fileID: 862557473}
   m_Layer: 0
   m_Name: Left Leg
   m_TagString: Human
@@ -1367,6 +1421,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 862557468}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &862557473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 862557468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093cf9ad75811b246a7be6ab80270aa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSensitivity: 100
+  sensitivitySpeed: 3
+  maxTotalBlood: 100
+  maxBloodperDrain: 100
+  cumulatedBloodDrain: 0
+  targetStat: {fileID: 85066528}
+  isDrainable: 1
 --- !u!1 &891377552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,6 +1620,7 @@ GameObject:
   - component: {fileID: 966013653}
   - component: {fileID: 966013652}
   - component: {fileID: 966013651}
+  - component: {fileID: 966013654}
   m_Layer: 0
   m_Name: Body
   m_TagString: Human
@@ -1623,6 +1696,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 966013649}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &966013654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 966013649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093cf9ad75811b246a7be6ab80270aa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSensitivity: 100
+  sensitivitySpeed: 3
+  maxTotalBlood: 100
+  maxBloodperDrain: 100
+  cumulatedBloodDrain: 0
+  targetStat: {fileID: 85066528}
+  isDrainable: 1
 --- !u!1 &1065796634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,6 +1874,7 @@ GameObject:
   - component: {fileID: 1177194113}
   - component: {fileID: 1177194112}
   - component: {fileID: 1177194111}
+  - component: {fileID: 1177194114}
   m_Layer: 0
   m_Name: Right Arm
   m_TagString: Human
@@ -1857,6 +1949,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1177194109}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1177194114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1177194109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093cf9ad75811b246a7be6ab80270aa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSensitivity: 100
+  sensitivitySpeed: 3
+  maxTotalBlood: 100
+  maxBloodperDrain: 100
+  cumulatedBloodDrain: 0
+  targetStat: {fileID: 85066528}
+  isDrainable: 1
 --- !u!1 &1242017585
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,6 +2188,7 @@ GameObject:
   - component: {fileID: 1404388815}
   - component: {fileID: 1404388814}
   - component: {fileID: 1404388813}
+  - component: {fileID: 1404388816}
   m_Layer: 0
   m_Name: Left Arm
   m_TagString: Human
@@ -2152,6 +2263,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1404388811}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1404388816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1404388811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093cf9ad75811b246a7be6ab80270aa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSensitivity: 100
+  sensitivitySpeed: 3
+  maxTotalBlood: 100
+  maxBloodperDrain: 100
+  cumulatedBloodDrain: 0
+  targetStat: {fileID: 85066528}
+  isDrainable: 1
 --- !u!1 &1409219609
 GameObject:
   m_ObjectHideFlags: 0

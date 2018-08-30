@@ -16,7 +16,7 @@ public class targetParts_stat : MonoBehaviour {
     int iterationNo = 1;
 
 
-    target_stat targetStat;
+    public target_stat targetStat;
 
 
 
