@@ -40,6 +40,8 @@ public class Human_Controller : MonoBehaviour {
 
         Left_Arm_Pivot.transform.LookAt(mosquito.transform.position);
         Right_Arm_Pivot.transform.LookAt(mosquito.transform.position);
+
+        transform.Translate(Vector3.forward * Time.deltaTime * 2);
     }
 
     private IEnumerator Track_Mosquito(float init_angle) {
@@ -57,7 +59,6 @@ public class Human_Controller : MonoBehaviour {
             angle = angle_towards_mosquito();
             yield return null;
         }
-        anim.Play("Human_Catch");
         canTrack = true;
         yield return null;
     }
