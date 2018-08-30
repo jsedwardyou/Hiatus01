@@ -74,6 +74,7 @@ public class mosquito_movement : MonoBehaviour {
             //stick to human 
             //TODO: change so that the mosquito only sticks to human when he/she is idle
             transform.SetParent(collision.transform);
+            Debug.Log(collision.collider.name);
         }
     }
 
@@ -101,9 +102,9 @@ public class mosquito_movement : MonoBehaviour {
         canMove = false;
 
         bool drainableTarget;
-        if (collision.gameObject.GetComponent<targetParts_stat>() != null)
+        if (collision.collider.gameObject.GetComponent<targetParts_stat>() != null)
         {
-            drainableTarget = collision.gameObject.GetComponent<targetParts_stat>().isDrainable;
+            drainableTarget = collision.collider.gameObject.GetComponent<targetParts_stat>().isDrainable;
         }
         else {
             drainableTarget = false;
@@ -112,7 +113,7 @@ public class mosquito_movement : MonoBehaviour {
         if (collision.transform.tag == "Human" && drainableTarget)
         {
             state.current_state = (mosquito_state.m_state)1;
-            suck.CurrentCollider = collision;
+            suck.CurrentCollider = collision.collider;
         }
         else
         {
