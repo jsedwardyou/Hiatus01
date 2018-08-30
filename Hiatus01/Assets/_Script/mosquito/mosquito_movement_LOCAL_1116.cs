@@ -7,6 +7,9 @@ public class mosquito_movement : MonoBehaviour {
 
     [SerializeField] private Camera fp_cam;
     [SerializeField] private Camera tp_cam;
+    private Vector3 fp_cam_pos;
+    private Vector3 tp_cam_pos;
+
 
     [SerializeField] private float speed;
     [SerializeField] private float jump_force;
@@ -15,17 +18,17 @@ public class mosquito_movement : MonoBehaviour {
     private bool canMove = true;
 
     private mosquito_state state;
-    private mosquito_suck suck;
 
     private Vector3 surface_vector = Vector3.up;
-
 
     // Use this for initialization
     void Start() {
         mouselook.Init(transform, fp_cam.transform);
         rb = GetComponent<Rigidbody>();
         state = GetComponent<mosquito_state>();
-        suck = GetComponent<mosquito_suck>();
+
+        fp_cam_pos = fp_cam.transform.localPosition;
+        tp_cam_pos = tp_cam.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -42,6 +45,7 @@ public class mosquito_movement : MonoBehaviour {
             {
                 rb.AddForce(Vector3.up * jump_force);
             }
+            LookAt_Mouse_Position();
         }
         else {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -51,7 +55,7 @@ public class mosquito_movement : MonoBehaviour {
                 Switch_To_FirstPerson();
             }
         }
-        LookAt_Mouse_Position();
+        
     }
 
     [SerializeField] private MouseLook mouselook = new MouseLook();
@@ -64,6 +68,12 @@ public class mosquito_movement : MonoBehaviour {
         Switch_To_ThirdPerson(collision);
 
         surface_vector = collision.contacts[0].point;
+
+        if (collision.transform.tag == "Human") {
+            //stick to human 
+            //TODO: change so that the mosquito only sticks to human when he/she is idle
+            transform.SetParent(collision.transform);
+        }
     }
 
 
@@ -77,7 +87,10 @@ public class mosquito_movement : MonoBehaviour {
         canMove = true;
 
         state.current_state = (mosquito_state.m_state)3;
-        suck.CurrentCollider = null;
+
+        transform.SetParent(null);
+
+        fp_cam.transform.localPosition = fp_cam_pos;
     }
     private void Switch_To_ThirdPerson(Collision collision)
     {
@@ -86,19 +99,16 @@ public class mosquito_movement : MonoBehaviour {
 
         canMove = false;
 
-        bool drainableTarget;
-        if (collision.gameObject.GetComponent<targetParts_stat>() != null) drainableTarget = collision.gameObject.GetComponent<targetParts_stat>().isDrainable;
-        else drainableTarget = false;
-
-        if (collision.transform.tag == "Human" && drainableTarget)
+        if (collision.transform.tag == "Human")
         {
             state.current_state = (mosquito_state.m_state)1;
-            suck.CurrentCollider = collision;
         }
         else
         {
             state.current_state = (mosquito_state.m_state)0;
         }
+
+        tp_cam.transform.localPosition = tp_cam_pos;
     }
 
     

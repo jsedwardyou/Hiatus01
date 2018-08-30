@@ -13,21 +13,46 @@ public class mosquito_suck : MonoBehaviour {
     [SerializeField] private Image blood_bar;
 
     private mosquito_state state;
+    private targetParts_stat targetPartsStat;
+    
+    private Collision currentCollider;
 
 	// Use this for initialization
 	void Start () {
         blood_bar.fillAmount = 0;
         state = GetComponent<mosquito_state>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (state.current_state == (mosquito_state.m_state)1) {
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (state.current_state == (mosquito_state.m_state)1)
+        {
             if (current_drain >= max_drain) return;
 
-            current_drain += speed_drain * Time.deltaTime;
-        }
+            targetPartsStat = currentCollider.gameObject.GetComponent<targetParts_stat>();
 
-        blood_bar.fillAmount = (current_drain / max_drain);
-	}
+            if (targetPartsStat.isDrainable == true)
+            {
+                current_drain += speed_drain * Time.deltaTime;
+
+                targetPartsStat.CumulatedBloodDrain += speed_drain * Time.deltaTime;
+                targetPartsStat.IncreaseSensitivity(targetPartsStat.sensitivitySpeed * Time.deltaTime);
+            }
+        }
+    }
+
+
+
+    public Collision CurrentCollider
+    {
+        get
+        {
+            return currentCollider;
+        }
+        set
+        {
+            currentCollider = value;
+        }
+    }
 }
