@@ -18,6 +18,7 @@ public class mosquito_movement : MonoBehaviour {
     private bool canMove = true;
 
     private mosquito_state state;
+    private mosquito_suck suck;
 
     private Vector3 surface_vector = Vector3.up;
 
@@ -26,9 +27,9 @@ public class mosquito_movement : MonoBehaviour {
         mouselook.Init(transform, fp_cam.transform);
         rb = GetComponent<Rigidbody>();
         state = GetComponent<mosquito_state>();
-
         fp_cam_pos = fp_cam.transform.localPosition;
         tp_cam_pos = tp_cam.transform.localPosition;
+        suck = GetComponent<mosquito_suck>();
     }
 
     // Update is called once per frame
@@ -99,9 +100,19 @@ public class mosquito_movement : MonoBehaviour {
 
         canMove = false;
 
-        if (collision.transform.tag == "Human")
+        bool drainableTarget;
+        if (collision.gameObject.GetComponent<targetParts_stat>() != null)
+        {
+            drainableTarget = collision.gameObject.GetComponent<targetParts_stat>().isDrainable;
+        }
+        else {
+            drainableTarget = false;
+        }
+
+        if (collision.transform.tag == "Human" && drainableTarget)
         {
             state.current_state = (mosquito_state.m_state)1;
+            suck.CurrentCollider = collision;
         }
         else
         {
