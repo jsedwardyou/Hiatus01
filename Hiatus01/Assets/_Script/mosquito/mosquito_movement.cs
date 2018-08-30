@@ -45,6 +45,7 @@ public class mosquito_movement : MonoBehaviour {
             {
                 rb.AddForce(Vector3.up * jump_force);
             }
+            LookAt_Mouse_Position();
         }
         else {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -54,7 +55,7 @@ public class mosquito_movement : MonoBehaviour {
                 Switch_To_FirstPerson();
             }
         }
-        LookAt_Mouse_Position();
+        
     }
 
     [SerializeField] private MouseLook mouselook = new MouseLook();

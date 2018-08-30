@@ -12,9 +12,12 @@ public class Human_Controller : MonoBehaviour {
 
     private bool canTrack = true;
 
+    private Animator anim;
+
 	// Use this for initialization
 	void Start () {
         mosquito = GameObject.Find("Mosquito");
+        anim = GetComponent<Animator>();
 	}
 
     // Update is called once per frame
@@ -32,6 +35,7 @@ public class Human_Controller : MonoBehaviour {
                 StartCoroutine(Track_Mosquito(angle));
             }
         }
+        
 	}
 
     private IEnumerator Track_Mosquito(float init_angle) {
@@ -49,6 +53,7 @@ public class Human_Controller : MonoBehaviour {
             angle = angle_towards_mosquito();
             yield return null;
         }
+        anim.Play("Human_StandUp");
         canTrack = true;
         yield return null;
     }
