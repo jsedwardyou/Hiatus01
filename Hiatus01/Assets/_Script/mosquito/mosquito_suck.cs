@@ -15,7 +15,7 @@ public class mosquito_suck : MonoBehaviour {
     private mosquito_state state;
     private targetParts_stat targetPartsStat;
     
-    private Collision currentCollider;
+    private Collider currentCollider;
 
 	// Use this for initialization
 	void Start () {
@@ -35,6 +35,7 @@ public class mosquito_suck : MonoBehaviour {
             if (targetPartsStat.isDrainable == true)
             {
                 current_drain += speed_drain * Time.deltaTime;
+                blood_bar.fillAmount = current_drain / max_drain;
 
                 targetPartsStat.CumulatedBloodDrain += speed_drain * Time.deltaTime;
                 targetPartsStat.IncreaseSensitivity(targetPartsStat.sensitivitySpeed * Time.deltaTime);
@@ -44,7 +45,7 @@ public class mosquito_suck : MonoBehaviour {
 
 
 
-    public Collision CurrentCollider
+    public Collider CurrentCollider
     {
         get
         {
